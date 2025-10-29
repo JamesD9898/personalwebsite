@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <style>
       * {
         margin: 0;
@@ -26,6 +30,7 @@
           #764ba2 50%,
           #f093fb 100%
         );
+        background-attachment: fixed;
         min-height: 100vh;
         color: #2d3748;
         overflow-y: auto;
@@ -108,31 +113,42 @@
       }
 
       .hero h1 {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
         font-weight: 700;
         margin-bottom: 1rem;
         color: #fff;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
         animation: fadeInUp 0.8s ease-out 0.2s both;
       }
 
       .hero-bio {
+        font-family: "Courier New", "Monaco", "Lucida Console", monospace;
         font-size: 1.15rem;
         font-weight: 400;
         max-width: 650px;
         margin: 0 auto 0.75rem;
         line-height: 1.7;
-        color: rgba(255, 255, 255, 0.95);
+        color: #4ade80;
         text-align: center;
         animation: fadeInUp 0.8s ease-out 0.4s both;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        text-shadow: 0 2px 8px rgba(74, 222, 128, 0.3);
+        background: rgba(0, 0, 0, 0.3);
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(74, 222, 128, 0.2);
+        backdrop-filter: blur(10px);
+      }
+
+      .hero-bio::before {
+        content: "> ";
+        color: #60a5fa;
       }
 
       .section-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
         font-weight: 600;
-        margin-bottom: 1.5rem;
-        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
         text-align: center;
         color: #fff;
         animation: fadeInUp 0.8s ease-out 0.6s both;
@@ -271,8 +287,8 @@
       }
 
       .card-image {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         border-radius: 24px;
         object-fit: cover;
         margin-bottom: 1.25rem;
@@ -320,8 +336,8 @@
       }
 
       .card-modal-image {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         border-radius: 20px;
         object-fit: cover;
         margin: 0 auto 1.5rem;
@@ -452,13 +468,18 @@
         }
 
         .card-image {
-          width: 70px;
-          height: 70px;
+          width: 100px;
+          height: 100px;
         }
 
         .card-modal {
           width: 350px;
           padding: 1.75rem;
+        }
+
+        .card-modal-image {
+          width: 100px;
+          height: 100px;
         }
       }
 
@@ -468,7 +489,7 @@
         }
 
         .hero h1 {
-          font-size: 2rem;
+          font-size: 2.5rem;
         }
 
         .hero-bio {
@@ -477,7 +498,7 @@
         }
 
         .section-title {
-          font-size: 1.2rem;
+          font-size: 1.8rem;
         }
 
         .profile-picture {
@@ -501,8 +522,8 @@
         }
 
         .card-image {
-          width: 70px;
-          height: 70px;
+          width: 90px;
+          height: 90px;
         }
 
         .card h3 {
@@ -534,7 +555,7 @@
 
       @media (max-width: 480px) {
         .hero h1 {
-          font-size: 1.75rem;
+          font-size: 2rem;
         }
 
         .hero-bio {
@@ -554,6 +575,11 @@
         }
 
         .card-modal-image {
+          width: 90px;
+          height: 90px;
+        }
+
+        .card-image {
           width: 80px;
           height: 80px;
         }
@@ -587,26 +613,26 @@
                 src="media/research1.png"
                 alt="Research"
                 class="card-modal-image"
-                onerror="this.src='https://via.placeholder.com/100/667eea/ffffff?text=Research'"
+                onerror="this.src='https://via.placeholder.com/120/667eea/ffffff?text=Research'"
               />
               <h3>LiDAR Research</h3>
+              <a href="research.html" class="card-modal-cta">
+                <span>→</span>
+                <span>View Full Project</span>
+              </a>
               <p class="card-modal-description">
                 Our research created a novel 3D LiDAR sensor that uses an
                 oscillating 2D sensor, combined with advanced processing
                 techniques to create extremely precise 3D scans, for low budget
                 projects.
               </p>
-              <a href="research.html" class="card-modal-cta">
-                <span>→</span>
-                <span>View Full Project</span>
-              </a>
             </div>
             <a href="research.html" class="card">
               <img
                 src="media/research1.png"
                 alt="Research"
                 class="card-image"
-                onerror="this.src='https://via.placeholder.com/100/667eea/ffffff?text=Research'"
+                onerror="this.src='https://via.placeholder.com/120/667eea/ffffff?text=Research'"
               />
               <h3>LiDAR Research</h3>
             </a>
@@ -619,24 +645,28 @@
                 src="charlando-icon.jpg"
                 alt="Charlandoai.com"
                 class="card-modal-image"
-                onerror="this.src='https://via.placeholder.com/100/764ba2/ffffff?text=Charlando'"
+                onerror="this.src='https://via.placeholder.com/120/764ba2/ffffff?text=Charlando'"
               />
               <h3>Charlandoai.com</h3>
+              <a
+                href="https://charlandoai.com"
+                target="_blank"
+                class="card-modal-cta"
+              >
+                <span>🌐</span>
+                <span>Visit Website</span>
+              </a>
               <p class="card-modal-description">
                 My language learning website that creates a new way to learn
                 languages through conversational AI, scenarios, and stories.
               </p>
-              <a href="charlandoai.html" class="card-modal-cta">
-                <span>→</span>
-                <span>Find Out More</span>
-              </a>
             </div>
-            <a href="charlandoai.html" class="card">
+            <a href="https://charlandoai.com" target="_blank" class="card">
               <img
                 src="charlando-icon.jpg"
                 alt="Charlandoai.com"
                 class="card-image"
-                onerror="this.src='https://via.placeholder.com/110/764ba2/ffffff?text=Charlando'"
+                onerror="this.src='https://via.placeholder.com/120/764ba2/ffffff?text=Charlando'"
               />
               <h3>Charlandoai.com</h3>
             </a>
@@ -649,9 +679,13 @@
                 src="music-icon.jpg"
                 alt="Musical Compositions"
                 class="card-modal-image"
-                onerror="this.src='https://via.placeholder.com/100/f093fb/ffffff?text=Music'"
+                onerror="this.src='https://via.placeholder.com/120/f093fb/ffffff?text=Music'"
               />
               <h3>Musical Compositions</h3>
+              <a href="compositions.html" class="card-modal-cta">
+                <span>→</span>
+                <span>View My Compositions</span>
+              </a>
               <p class="card-modal-description">
                 Award-winning composer for concert hall, theater, and film. My
                 piece "Milena" won first place at the BCA Composition Contest. I
@@ -659,17 +693,13 @@
                 multi-instrumentalist playing piano, guitar, bass, and
                 saxophone.
               </p>
-              <a href="compositions.html" class="card-modal-cta">
-                <span>→</span>
-                <span>View My Compositions</span>
-              </a>
             </div>
             <a href="compositions.html" class="card">
               <img
                 src="music-icon.jpg"
                 alt="Musical Compositions"
                 class="card-image"
-                onerror="this.src='https://via.placeholder.com/110/f093fb/ffffff?text=Music'"
+                onerror="this.src='https://via.placeholder.com/120/f093fb/ffffff?text=Music'"
               />
               <h3>Musical Compositions</h3>
             </a>
