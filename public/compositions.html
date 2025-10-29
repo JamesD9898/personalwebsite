@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musical Compositions - James Doherty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #f093fb 100%
+        );
+        min-height: 100vh;
+        color: #2d3748;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 255, 255, 0.2) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.15) 0%,
+            transparent 50%
+          );
+        animation: float 15s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(30px, -30px);
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        color: #2d3748;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+
+      .back-button:hover {
+        background: rgba(255, 255, 255, 0.35);
+        transform: translateX(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .page-header {
+        text-align: center;
+        padding: 3rem 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .page-header h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #fff;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .page-header p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.95);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      .composition-card {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 24px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        align-items: start;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      }
+
+      .composition-card:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 45px rgba(31, 38, 135, 0.2);
+      }
+
+      .composition-artwork {
+        width: 100%;
+        height: 300px;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .composition-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .composition-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .composition-title {
+        flex: 1;
+      }
+
+      .composition-card h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #2d3748;
+      }
+
+      .composition-meta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.5rem;
+      }
+
+      .meta-badge {
+        padding: 0.4rem 1rem;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: #2d3748;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        font-weight: 500;
+      }
+
+      .composition-description {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: #4a5568;
+        margin-top: 1rem;
+      }
+
+      .composition-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      }
+
+      .detail-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .detail-label {
+        font-size: 0.85rem;
+        color: #718096;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+      }
+
+      .detail-value {
+        font-size: 1rem;
+        color: #2d3748;
+        font-weight: 600;
+      }
+
+      .inspiration-section {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 16px;
+        border-left: 4px solid rgba(102, 126, 234, 0.6);
+      }
+
+      .inspiration-section h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #2d3748;
+      }
+
+      .inspiration-section p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: #4a5568;
+      }
+
+      .composition-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+      }
+
+      .action-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 30px;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        color: #2d3748;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+
+      .action-button:hover {
+        background: rgba(255, 255, 255, 0.6);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .action-button.primary {
+        background: rgba(255, 255, 255, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        font-weight: 600;
+      }
+
+      .action-button.primary:hover {
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .category-section {
+        margin-bottom: 3rem;
+      }
+
+      .category-header {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      }
+
+      .category-header h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+      }
+
+      .category-header p {
+        font-size: 1rem;
+        color: #4a5568;
+      }
+
+      footer {
+        margin-top: 4rem;
+        padding: 2rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 968px) {
+        .composition-card {
+          grid-template-columns: 1fr;
+        }
+
+        .composition-artwork {
+          height: 250px;
+          width: 100%;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+
+        .page-header h1 {
+          font-size: 2rem;
+        }
+
+        .composition-card h2 {
+          font-size: 1.6rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .page-header {
+          padding: 2rem 1rem;
+        }
+
+        .page-header h1 {
+          font-size: 1.75rem;
+        }
+
+        .page-header p {
+          font-size: 1rem;
+        }
+
+        .composition-card {
+          padding: 1.5rem;
+        }
+
+        .composition-card h2 {
+          font-size: 1.4rem;
+        }
+
+        .composition-description {
+          font-size: 1rem;
+        }
+
+        .category-header {
+          padding: 1.25rem 1.5rem;
+        }
+
+        .category-header h2 {
+          font-size: 1.6rem;
+        }
+
+        .inspiration-section,
+        .composition-details {
+          padding: 1.25rem;
+        }
+
+        .inspiration-section h4 {
+          font-size: 1rem;
+        }
+
+        .composition-details {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 0.75rem;
+        }
+
+        .composition-card {
+          padding: 1.25rem;
+        }
+
+        .composition-artwork {
+          height: 200px;
+        }
+
+        .page-header h1 {
+          font-size: 1.5rem;
+        }
+
+        .composition-card h2 {
+          font-size: 1.3rem;
+        }
+
+        .category-header h2 {
+          font-size: 1.4rem;
+        }
+
+        .composition-actions {
+          flex-direction: column;
+        }
+
+        .action-button {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .detail-label {
+          font-size: 0.8rem;
+        }
+
+        .detail-value {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-button">
+        <span>←</span>
+        <span>Back to Home</span>
+      </a>
+
+      <header class="page-header">
+        <h1>Musical Compositions</h1>
+        <p>
+          A collection of my original works exploring diverse musical styles and
+          creative expressions. Each piece tells a unique story.
+        </p>
+      </header>
+
+      <div class="category-section">
+        <div class="category-header">
+          <h2>🎼 Orchestral & Classical</h2>
+          <p>
+            Compositions for orchestra, chamber ensembles, and solo instruments
+          </p>
+        </div>
+
+        <div class="composition-card">
+          <img
+            src="composition-1.jpg"
+            alt="Composition Artwork"
+            class="composition-artwork"
+            onerror="this.src='https://via.placeholder.com/300x300/667eea/ffffff?text=Symphony'"
+          />
+          <div class="composition-info">
+            <div class="composition-header">
+              <div class="composition-title">
+                <h2>Symphony in D Minor</h2>
+                <div class="composition-meta">
+                  <span class="meta-badge">Orchestral</span>
+                  <span class="meta-badge">2024</span>
+                  <span class="meta-badge">18 minutes</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="composition-description">
+              A dramatic symphonic work in three movements, exploring themes of
+              struggle, reflection, and triumph. Written for full symphony
+              orchestra with extensive development sections and rich harmonic
+              language.
+            </p>
+
+            <div class="composition-details">
+              <div class="detail-item">
+                <span class="detail-label">Instrumentation</span>
+                <span class="detail-value">Full Orchestra</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Duration</span>
+                <span class="detail-value">18:30</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Key</span>
+                <span class="detail-value">D Minor</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Movements</span>
+                <span class="detail-value">3</span>
+              </div>
+            </div>
+
+            <div class="inspiration-section">
+              <h4>Inspiration & Background</h4>
+              <p>
+                This symphony was inspired by personal experiences of overcoming
+                challenges and finding inner strength. The first movement
+                represents conflict, the second offers a contemplative respite,
+                and the finale builds to a powerful resolution.
+              </p>
+            </div>
+
+            <div class="composition-actions">
+              <a href="#" class="action-button primary">
+                <span>▶</span>
+                <span>Listen</span>
+              </a>
+              <a href="#" class="action-button">
+                <span>📄</span>
+                <span>View Score</span>
+              </a>
+              <a href="#" class="action-button">
+                <span>📝</span>
+                <span>Program Notes</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="composition-card">
+          <img
+            src="composition-2.jpg"
+            alt="Composition Artwork"
+            class="composition-artwork"
+            onerror="this.src='https://via.placeholder.com/300x300/764ba2/ffffff?text=Piano+Sonata'"
+          />
+          <div class="composition-info">
+            <div class="composition-header">
+              <div class="composition-title">
+                <h2>Piano Sonata No. 1</h2>
+                <div class="composition-meta">
+                  <span class="meta-badge">Piano Solo</span>
+                  <span class="meta-badge">2023</span>
+                  <span class="meta-badge">12 minutes</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="composition-description">
+              An introspective work for solo piano that explores the full range
+              of the instrument. The piece balances technical virtuosity with
+              lyrical expressiveness, featuring complex rhythmic patterns and
+              innovative harmonic progressions.
+            </p>
+
+            <div class="composition-details">
+              <div class="detail-item">
+                <span class="detail-label">Instrumentation</span>
+                <span class="detail-value">Piano</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Duration</span>
+                <span class="detail-value">12:15</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Difficulty</span>
+                <span class="detail-value">Advanced</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Form</span>
+                <span class="detail-value">Sonata-Allegro</span>
+              </div>
+            </div>
+
+            <div class="inspiration-section">
+              <h4>Inspiration & Background</h4>
+              <p>
+                Written during a period of musical experimentation, this sonata
+                blends classical form with contemporary harmonic language. The
+                work has been performed in several student recitals and received
+                recognition in regional composition competitions.
+              </p>
+            </div>
+
+            <div class="composition-actions">
+              <a href="#" class="action-button primary">
+                <span>▶</span>
+                <span>Listen</span>
+              </a>
+              <a href="#" class="action-button">
+                <span>📄</span>
+                <span>View Score</span>
+              </a>
+              <a href="#" class="action-button">
+                <span>🎹</span>
+                <span>Performance Video</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-section">
+        <div class="category-header">
+          <h2>🎹 Contemporary & Electronic</h2>
+          <p>Modern compositions blending acoustic and electronic elements</p>
+        </div>
+
+        <div class="composition-card">
+          <img
+            src="composition-3.jpg"
+            alt="Composition Artwork"
+            class="composition-artwork"
+            onerror="this.src='https://via.placeholder.com/300x300/f093fb/ffffff?text=Digital+Dreams'"
+          />
+          <div class="composition-info">
+            <div class="composition-header">
+              <div class="composition-title">
+                <h2>Digital Dreams</h2>
+                <div class="composition-meta">
+                  <span class="meta-badge">Electronic</span>
+                  <span class="meta-badge">2024</span>
+                  <span class="meta-badge">5 minutes</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="composition-description">
+              An ambient electronic piece that explores the intersection of
+              technology and emotion. Utilizing synthesizers, samples, and
+              digital audio manipulation to create an immersive sonic landscape.
+            </p>
+
+            <div class="composition-details">
+              <div class="detail-item">
+                <span class="detail-label">Genre</span>
+                <span class="detail-value">Ambient Electronic</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Duration</span>
+                <span class="detail-value">5:20</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">DAW</span>
+                <span class="detail-value">Ableton Live</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">BPM</span>
+                <span class="detail-value">85</span>
+              </div>
+            </div>
+
+            <div class="inspiration-section">
+              <h4>Inspiration & Background</h4>
+              <p>
+                This piece explores how digital technology influences modern
+                creativity and consciousness. It combines organic soundscapes
+                with synthetic textures, reflecting the dual nature of our
+                technology-integrated lives.
+              </p>
+            </div>
+
+            <div class="composition-actions">
+              <a href="#" class="action-button primary">
+                <span>▶</span>
+                <span>Listen</span>
+              </a>
+              <a href="#" class="action-button">
+                <span>💾</span>
+                <span>Download</span>
+              </a>
+              <a href="#" class="action-button">
+                <span>🎛️</span>
+                <span>Production Notes</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-section">
+        <div class="category-header">
+          <h2>🎬 Film & Media</h2>
+          <p>Compositions for visual media and interactive experiences</p>
+        </div>
+
+        <div class="composition-card">
+          <img
+            src="composition-4.jpg"
+            alt="Composition Artwork"
+            class="composition-artwork"
+            onerror="this.src='https://via.placeholder.com/300x300/667eea/ffffff?text=Film+Score'"
+          />
+          <div class="composition-info">
+            <div class="composition-header">
+              <div class="composition-title">
+                <h2>Cinematic Suite</h2>
+                <div class="composition-meta">
+                  <span class="meta-badge">Film Score</span>
+                  <span class="meta-badge">2024</span>
+                  <span class="meta-badge">8 minutes</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="composition-description">
+              A dramatic orchestral suite designed for narrative storytelling.
+              Features distinct themes for characters and emotional arcs, with
+              dynamic orchestration that supports visual narrative pacing.
+            </p>
+
+            <div class="composition-details">
+              <div class="detail-item">
+                <span class="detail-label">Type</span>
+                <span class="detail-value">Film Music</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Duration</span>
+                <span class="detail-value">8:45</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Ensemble</span>
+                <span class="detail-value">Orchestra + Electronics</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Themes</span>
+                <span class="detail-value">5</span>
+              </div>
+            </div>
+
+            <div class="inspiration-section">
+              <h4>Inspiration & Background</h4>
+              <p>
+                Created as an exploration of leitmotif techniques in modern film
+                scoring, this suite demonstrates how recurring musical themes
+                can enhance storytelling. The work combines traditional
+                orchestral elements with subtle electronic enhancements.
+              </p>
+            </div>
+
+            <div class="composition-actions">
+              <a href="#" class="action-button primary">
+                <span>▶</span>
+                <span>Listen</span>
+              </a>
+              <a href="#" class="action-button">
+                <span>🎥</span>
+                <span>Video Demo</span>
+              </a>
+              <a href="#" class="action-button">
+                <span>📊</span>
+                <span>Theme Analysis</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 James Doherty. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
