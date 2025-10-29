@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research - James Doherty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #f093fb 100%
+        );
+        min-height: 100vh;
+        color: #2d3748;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 255, 255, 0.2) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.15) 0%,
+            transparent 50%
+          );
+        animation: float 15s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(30px, -30px);
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        color: #2d3748;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+
+      .back-button:hover {
+        background: rgba(255, 255, 255, 0.35);
+        transform: translateX(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* hero pdf section */
+      .hero-pdf-section {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        padding: 2rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      }
+
+      .pdf-viewer {
+        width: 100%;
+        height: 700px;
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .pdf-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 30px;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        color: #2d3748;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+      }
+
+      .pdf-download:hover {
+        background: rgba(255, 255, 255, 0.6);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .page-header {
+        text-align: center;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      }
+
+      .page-header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #2d3748;
+        line-height: 1.3;
+      }
+
+      .page-header .authors {
+        font-size: 1.1rem;
+        color: #4a5568;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      .page-header .institution {
+        font-size: 1rem;
+        color: #718096;
+        font-style: italic;
+      }
+
+      .content-section {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      }
+
+      .content-section h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: #2d3748;
+        border-bottom: 3px solid rgba(102, 126, 234, 0.3);
+        padding-bottom: 0.5rem;
+      }
+
+      .content-section h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #2d3748;
+      }
+
+      .content-section p {
+        font-size: 1.05rem;
+        line-height: 1.9;
+        color: #4a5568;
+        margin-bottom: 1.5rem;
+        text-align: justify;
+      }
+
+      .content-section ul,
+      .content-section ol {
+        margin-left: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .content-section li {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: #4a5568;
+        margin-bottom: 0.75rem;
+      }
+
+      .research-question {
+        background: rgba(102, 126, 234, 0.1);
+        border-left: 4px solid rgba(102, 126, 234, 0.6);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+      }
+
+      .research-question p {
+        font-size: 1.15rem;
+        font-weight: 500;
+        color: #2d3748;
+        font-style: italic;
+        margin-bottom: 0;
+      }
+
+      .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .material-item {
+        background: rgba(255, 255, 255, 0.4);
+        padding: 1rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+
+      .material-item strong {
+        color: #2d3748;
+        font-size: 1.05rem;
+      }
+
+      .software-list {
+        background: rgba(255, 255, 255, 0.3);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-top: 1rem;
+      }
+
+      .bibliography-item {
+        background: rgba(255, 255, 255, 0.3);
+        padding: 1.25rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        border-left: 3px solid rgba(102, 126, 234, 0.4);
+      }
+
+      .bibliography-item p {
+        margin-bottom: 0;
+        font-size: 0.95rem;
+      }
+
+      /* gallery section */
+      .gallery-section {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        padding: 2.5rem;
+        margin-bottom: 3rem;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      }
+
+      .gallery-section h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: #2d3748;
+        text-align: center;
+      }
+
+      .gallery-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .gallery-image-item {
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .gallery-image-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
+      }
+
+      .gallery-image-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      footer {
+        margin-top: 4rem;
+        padding: 2rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .back-button {
+          margin-bottom: 1rem;
+        }
+
+        .hero-pdf-section {
+          padding: 1rem;
+        }
+
+        .pdf-viewer {
+          height: 400px;
+        }
+
+        .page-header {
+          padding: 1.5rem;
+        }
+
+        .page-header h1 {
+          font-size: 1.5rem;
+          line-height: 1.4;
+        }
+
+        .page-header .authors,
+        .page-header .institution {
+          font-size: 0.95rem;
+        }
+
+        .content-section {
+          padding: 1.5rem;
+        }
+
+        .content-section h2 {
+          font-size: 1.4rem;
+        }
+
+        .content-section h3 {
+          font-size: 1.2rem;
+        }
+
+        .content-section p,
+        .content-section li {
+          font-size: 0.95rem;
+          text-align: left;
+        }
+
+        .materials-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .research-question {
+          padding: 1rem;
+        }
+
+        .gallery-section {
+          padding: 1.5rem;
+        }
+
+        .gallery-list {
+          gap: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0.75rem;
+        }
+
+        .pdf-viewer {
+          height: 300px;
+        }
+
+        .page-header h1 {
+          font-size: 1.25rem;
+        }
+
+        .content-section {
+          padding: 1.25rem;
+        }
+
+        .content-section h2 {
+          font-size: 1.25rem;
+        }
+
+        .content-section p,
+        .content-section li {
+          font-size: 0.9rem;
+        }
+
+        .gallery-list {
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-button">
+        <span>←</span>
+        <span>Back to Home</span>
+      </a>
+
+      <!-- hero pdf preview -->
+      <div class="hero-pdf-section">
+        <iframe
+          src="media/TrifoldResearch.pdf"
+          class="pdf-viewer"
+          type="application/pdf"
+          title="LiDAR Research Paper"
+        >
+          <p>
+            Your browser does not support PDFs.
+            <a href="media/TrifoldResearch.pdf" download>Download the PDF</a>.
+          </p>
+        </iframe>
+        <a href="media/TrifoldResearch.pdf" download class="pdf-download">
+          <span>📄</span>
+          <span>Download Full Research</span>
+        </a>
+      </div>
+
+      <!-- title and authors -->
+      <header class="page-header">
+        <h1>
+          Cheaper Alternative to LiDAR Based 3D Interior Mapping and Annotation
+        </h1>
+        <p class="authors">James Doherty, Michael Hernandez</p>
+        <p class="institution">Bergen County Academies</p>
+      </header>
+
+      <!-- abstract -->
+      <div class="content-section">
+        <h2>Abstract</h2>
+        <p>
+          As camera and sensor aided technology has been utilized increasingly
+          by civil engineers and architects, affordable 2d LiDAR (Light
+          Detection and Ranging) systems have also become accessible to
+          consumers and hobbyists to use for a variety of purposes from
+          surveying to SLAM (Simultaneous Localization and Mapping) applications
+          in robotics. However, there is yet to be affordable (<$500) 3d LiDAR
+          scanners on the consumer market. Therefore, by using a readily
+          available and cheap 2d LiDAR scanner and rotating it on a horizontal
+          axis, a relatively accurate 3d LiDAR system can be constructed at
+          reasonable cost.
+        </p>
+        <p>
+          Our project consists of rotating a RPLIDAR A1 scanner with a hobbyist
+          servo controlled through an arduino that can collect real time 3d
+          point cloud data. In addition, by combining this data with IMU
+          (inertial measurement unit) sensors which can measure linear and
+          rotational acceleration to determine location, the LiDAR can be moved
+          through space and form a point cloud of entire rooms for further use.
+          Additionally, our semantic segmentation algorithm can parse through
+          point cloud data and detect objects which has many useful applications
+          in 3d modelling and robotics.
+        </p>
+        <p>
+          The project can thus provide a low cost option for an automatic
+          comprehensive 3d view and measurements of an indoor space to be used
+          by engineers and architects to gauge the environment and approach
+          solutions. Furthermore, the ability to have a relatively cheap and
+          small 3d LiDAR scanner is highly useful for robotics applications such
+          as mapping and localization. This project can open opportunities to
+          hobbyist engineers as well as small scale teams with limited budget
+          the access to 3d LiDAR technology.
+        </p>
+        <p>
+          The device will be tested in hallways and rooms by measuring the
+          location of objects and walls in a room and then comparing this data
+          with information that the LiDAR records and calculates. The detection
+          of objects in the scan will be measured for accuracy by comparing the
+          detected objects and their locations with the actual objects.
+        </p>
+      </div>
+
+      <!-- rationale -->
+      <div class="content-section">
+        <h2>Rationale</h2>
+        <p>
+          3D LiDAR surveying is an important tool used in architecture,
+          robotics, and engineering. However, apt 3D lidar scanning systems are
+          very expensive (costing thousands of dollars per space) and usually
+          require professional operation. These factors make LiDAR technology
+          inaccessible to small teams and hobbyists. This project aims to
+          develop a cost-effective alternative to traditional indoor LiDAR
+          surveying.
+        </p>
+      </div>
+
+      <!-- research question -->
+      <div class="content-section">
+        <h2>Research Question</h2>
+        <div class="research-question">
+          <p>
+            How can an inexpensive 2D LiDAR scanner when combined with a
+            rotating mechanism and IMU sensors, be used to create a
+            cost-effective 3D surveying system in indoor environments?
+          </p>
+        </div>
+      </div>
+
+      <!-- materials -->
+      <div class="content-section">
+        <h2>List of Materials</h2>
+        <h3>Hardware</h3>
+        <div class="materials-grid">
+          <div class="material-item">
+            <strong>35 kg Servo Motor</strong> from DS Servo
+          </div>
+          <div class="material-item">
+            <strong>RPLidar A1M8</strong> from Slamtec
+          </div>
+          <div class="material-item">
+            <strong>MPU6050 6 axis IMU sensor</strong> from HiLetgo
+          </div>
+          <div class="material-item">
+            <strong>3D Printed Components</strong> Various custom parts
+          </div>
+          <div class="material-item">
+            <strong>Robot Chassis</strong> provided by the MRL
+          </div>
+          <div class="material-item">
+            <strong>2200 mAh LiPo Battery</strong>
+          </div>
+          <div class="material-item"><strong>Arduino Mega</strong></div>
+        </div>
+
+        <h3>Software</h3>
+        <div class="software-list">
+          <ul>
+            <li><strong>Arduino IDE</strong></li>
+            <li><strong>ROS 2</strong></li>
+            <li><strong>OneFormer 3D Segmentation Model</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- procedures -->
+      <div class="content-section">
+        <h2>Procedures</h2>
+        <p>
+          We secure our RPLIDAR sensor and attach a servo motor onto a stable
+          base that allows the LiDar to rotate about a vertical axis. We mount
+          the IMU sensor onto the LiDAR sensor to track rotation and lidar
+          points. We connect the servo and the IMU to an Arduino and the Lidar
+          to a computer. We write an Arduino script to control the motor and
+          read data from the IMU sensor. All of the electronics are controlled
+          by LiPo batteries for on the go data collection. There is a robot that
+          drives unintelligently throughout a room while the LiDAR collects
+          points from various locations.
+        </p>
+        <p>
+          We write a program to process the point data from the LIDAR into a CSV
+          file for segmentation processing. We have an intermediate Python
+          script that uses rotation matrices to give a visual representation of
+          the unprocessed data. We create a GUI (Graphic User Interface) in
+          Python to monitor sensor status, movement, and graph incoming data
+          from the LIDAR. We implement the OneFormer3D Panoptic Segmentation
+          algorithm to detect objects and miscellaneous points in the data
+          received. We run the segmentation algorithm on point cloud datasets
+          collected by peers to test the accuracy. We write a program to plot
+          these objects and generate 3D visuals, measurements and diagrams,
+          inside of the GUI. We test the system in hallways and rooms of
+          residential buildings and compare the 3D models with actual
+          measurements of the room and objects that exist in the room. We hope
+          for millimeter precision in the scan data.
+        </p>
+      </div>
+
+      <!-- risk and safety -->
+      <div class="content-section">
+        <h2>Risk and Safety</h2>
+        <p>
+          The actual sensors pose no risk as the light range that the lidar uses
+          is in a safe range for the eyes. The battery is powered by LiPo
+          batteries and these can pose some threat of sparks and fire but we
+          ensure safety by using a 25 amp fuse to protect if the current is too
+          high. Some of the robot functions at 12V and other parts at 5V and at
+          the low amperage we operate at this poses next to no risk however all
+          wires are shielded to prevent any touching of live wires.
+        </p>
+        <p>
+          There are no hazardous chemicals or microorganisms used in this
+          project. Devices used include a soldering iron, a heat gun, and an
+          electric drill. For the heat elements, proper PPE are used including
+          goggles, pants, and proper ventilation hoods as provided by MRL. A
+          clean work area is maintained at all times to ensure no accidents
+          happen. When using a drill, goggles are used and a clean work area is
+          maintained.
+        </p>
+      </div>
+
+      <!-- bibliography -->
+      <div class="content-section">
+        <h2>Bibliography</h2>
+        <div class="bibliography-item">
+          <p>
+            "Combining Camera and Lidar - DiffBot Differential Drive Mobile
+            Robot." Ros-Mobile-Robots.com, 2020,
+            ros-mobile-robots.com/theory/robot-vision/combining-camera-and-lidar/.
+            Accessed 3 Feb. 2025.
+          </p>
+        </div>
+        <div class="bibliography-item">
+          <p>
+            Kolodiazhnyi, M., Vorontsova, A., Konushin, A., & Rukhovich, D.
+            (2023, November). OneFormer3D: One Transformer for Unified Point
+            Cloud Segmentation. Retrieved from https://arxiv.org/abs/2311.14405.
+          </p>
+        </div>
+        <div class="bibliography-item">
+          <p>
+            Rohan Panicker. Sensor fusion between IMU and 2D LiDAR Odometry
+            based on NDT-ICP algorithm for Real-Time Indoor 3D Mapping.
+            TechRxiv. July 25, 2023.
+          </p>
+        </div>
+        <div class="bibliography-item">
+          <p>
+            Weisstein, Eric W. "Rodrigues' Rotation Formula."
+            Mathworld.wolfram.com,
+            mathworld.wolfram.com/RodriguesRotationFormula.html.
+          </p>
+        </div>
+        <div class="bibliography-item">
+          <p>
+            Zeng, Y., Yu, H., Dai, H., Song, S., Lin, M., Sun, B., Jiang, W., &
+            Meng, M. Q.-H. (2018). An Improved Calibration Method for a Rotating
+            2D LIDAR System. Sensors, 18(2), 497.
+            https://doi.org/10.3390/s18020497
+          </p>
+        </div>
+      </div>
+
+      <!-- gallery -->
+      <div class="gallery-section">
+        <h2>Project Gallery</h2>
+        <div class="gallery-list">
+          <div class="gallery-image-item">
+            <img
+              src="media/research1.png"
+              alt="LiDAR Setup"
+              onerror="this.src='https://via.placeholder.com/1000x600/667eea/ffffff?text=LiDAR+Setup'"
+            />
+          </div>
+          <div class="gallery-image-item">
+            <img
+              src="media/research2.png"
+              alt="Point Cloud Data"
+              onerror="this.src='https://via.placeholder.com/1000x600/764ba2/ffffff?text=Point+Cloud+Data'"
+            />
+          </div>
+          <div class="gallery-image-item">
+            <img
+              src="media/research3.png"
+              alt="Hardware Assembly"
+              onerror="this.src='https://via.placeholder.com/1000x600/f093fb/ffffff?text=Hardware+Assembly'"
+            />
+          </div>
+          <div class="gallery-image-item">
+            <img
+              src="media/research4.png"
+              alt="3D Scan Results"
+              onerror="this.src='https://via.placeholder.com/1000x600/667eea/ffffff?text=3D+Scan+Results'"
+            />
+          </div>
+          <div class="gallery-image-item">
+            <img
+              src="media/research5.png"
+              alt="Testing Environment"
+              onerror="this.src='https://via.placeholder.com/1000x600/764ba2/ffffff?text=Testing+Environment'"
+            />
+          </div>
+          <div class="gallery-image-item">
+            <img
+              src="media/research6.png"
+              alt="Segmentation Output"
+              onerror="this.src='https://via.placeholder.com/1000x600/f093fb/ffffff?text=Segmentation+Output'"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 James Doherty. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
