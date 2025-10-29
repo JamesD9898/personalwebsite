@@ -259,7 +259,8 @@
       }
 
       @keyframes pulse {
-        0%, 100% {
+        0%,
+        100% {
           transform: scale(0.95);
           opacity: 0.5;
         }
@@ -289,11 +290,13 @@
 
       /* modal that appears in front of card */
       .card-modal {
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0.8);
         width: 400px;
+        max-height: 70vh;
+        overflow-y: auto;
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(40px);
         -webkit-backdrop-filter: blur(40px);
@@ -304,7 +307,7 @@
         opacity: 0;
         pointer-events: none;
         transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        z-index: 200;
+        z-index: 9999;
       }
 
       .card-wrapper:hover .card-modal {
@@ -313,9 +316,24 @@
         transform: translate(-50%, -50%) scale(1);
       }
 
-      /* backdrop for modal - only dims area behind this specific card */
+      /* backdrop for modal */
       .modal-backdrop {
-        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+        z-index: 9998;
+      }
+
+      .card-wrapper:hover .modal-backdrop {
+        opacity: 1;
+        pointer-events: auto;
       }
 
       .card-modal-image {
@@ -373,6 +391,25 @@
       .card-wrapper:hover .card-modal {
         box-shadow: 0 25px 70px rgba(31, 38, 135, 0.35),
           0 0 40px rgba(102, 126, 234, 0.15);
+      }
+
+      /* smooth scrollbar for modal */
+      .card-modal::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .card-modal::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+
+      .card-modal::-webkit-scrollbar-thumb {
+        background: rgba(102, 126, 234, 0.5);
+        border-radius: 10px;
+      }
+
+      .card-modal::-webkit-scrollbar-thumb:hover {
+        background: rgba(102, 126, 234, 0.7);
       }
 
       /* footer */
@@ -538,6 +575,7 @@
         .card-modal {
           width: calc(100vw - 2rem);
           max-width: 380px;
+          max-height: 75vh;
           padding: 2rem;
         }
 
@@ -581,6 +619,7 @@
         .card-modal {
           width: calc(100vw - 2rem);
           max-width: 340px;
+          max-height: 80vh;
           padding: 1.75rem;
         }
 
@@ -615,7 +654,7 @@
             <div class="modal-backdrop"></div>
             <div class="card-modal">
               <img
-                src="research-icon.jpg"
+                src="media/research1.png"
                 alt="Research"
                 class="card-modal-image"
                 onerror="this.src='https://via.placeholder.com/100/667eea/ffffff?text=Research'"
@@ -684,14 +723,15 @@
               />
               <h3>Musical Compositions</h3>
               <p class="card-modal-description">
-                I am a composer for short films, theater productions, and for
-                fun. Unless otherwise stated, I write, record, produce, and mix
-                the music myself as a multi-instrumentalist playing piano,
-                guitar, bass, and saxophone.
+                Award-winning composer for concert hall, theater, and film. My
+                piece "Milena" won first place at the BCA Composition Contest. I
+                write, record, produce, and mix all my music as a
+                multi-instrumentalist playing piano, guitar, bass, and
+                saxophone.
               </p>
               <a href="compositions.html" class="card-modal-cta">
                 <span>→</span>
-                <span>View My Best Work</span>
+                <span>View My Compositions</span>
               </a>
             </div>
             <a href="compositions.html" class="card">

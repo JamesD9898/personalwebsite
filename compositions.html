@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musical Compositions - James Doherty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 50%,
+          #f093fb 100%
+        );
+        min-height: 100vh;
+        color: #2d3748;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(120, 119, 198, 0.3),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 111, 145, 0.3),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 20%,
+            rgba(102, 126, 234, 0.2),
+            transparent 50%
+          );
+        animation: moveGradient 20s ease infinite;
+        pointer-events: none;
+      }
+
+      @keyframes moveGradient {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(30px, -30px);
+        }
+      }
+
+      .container {
+        min-height: 100vh;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+      }
+
+      .back-button:hover {
+        background: rgba(255, 255, 255, 0.35);
+        transform: translateX(-5px);
+      }
+
+      .page-header {
+        text-align: center;
+        padding: 3rem 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .page-header h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .page-header p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+
+      .composition-card {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 28px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        padding: 3rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        max-width: 1200px;
+        margin: 0 auto 2rem;
+      }
+
+      .composition-card:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+      }
+
+      .composition-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .composition-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 1rem;
+      }
+
+      .composition-meta {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .meta-badge {
+        padding: 0.6rem 1.5rem;
+        background: rgba(102, 126, 234, 0.2);
+        border-radius: 25px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #667eea;
+        border: 1px solid rgba(102, 126, 234, 0.3);
+      }
+
+      .composition-description {
+        font-size: 1.1rem;
+        line-height: 1.9;
+        color: #4a5568;
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto 3rem;
+      }
+
+      .pdf-section,
+      .audio-section {
+        margin: 3rem 0;
+      }
+
+      .pdf-section h3,
+      .audio-section h3 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .pdf-preview {
+        width: 100%;
+        height: 600px;
+        border-radius: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      .audio-player {
+        width: 100%;
+        max-width: 700px;
+        display: block;
+        margin: 0 auto;
+        height: 50px;
+        border-radius: 25px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .composition-actions {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+      }
+
+      .action-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2.5rem;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 35px;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        color: #2d3748;
+        text-decoration: none;
+        transition: all 0.4s ease;
+        font-size: 1rem;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .action-button:hover {
+        background: rgba(255, 255, 255, 0.7);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .action-button.primary {
+        background: rgba(102, 126, 234, 0.3);
+        border: 2px solid rgba(102, 126, 234, 0.5);
+        color: #667eea;
+      }
+
+      .action-button.primary:hover {
+        background: rgba(102, 126, 234, 0.45);
+        border-color: rgba(102, 126, 234, 0.7);
+      }
+
+      footer {
+        margin-top: 4rem;
+        padding: 2rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+        }
+
+        .page-header {
+          padding: 2rem 1rem;
+        }
+
+        .page-header h1 {
+          font-size: 1.75rem;
+        }
+
+        .page-header p {
+          font-size: 1rem;
+        }
+
+        .composition-card {
+          padding: 2rem;
+        }
+
+        .composition-header h2 {
+          font-size: 1.8rem;
+        }
+
+        .pdf-preview {
+          height: 400px;
+        }
+
+        .composition-description {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .composition-card {
+          padding: 1.5rem;
+        }
+
+        .composition-header h2 {
+          font-size: 1.5rem;
+        }
+
+        .pdf-preview {
+          height: 300px;
+        }
+
+        .action-button {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="index.html" class="back-button">
+        <span>←</span>
+        <span>Back to Home</span>
+      </a>
+
+      <header class="page-header">
+        <h1>Musical Compositions</h1>
+        <p>
+          Award-winning compositions exploring diverse musical styles and
+          creative expressions.
+        </p>
+      </header>
+
+      <div class="composition-card">
+        <div class="composition-header">
+          <h2>Milena</h2>
+          <div class="composition-meta">
+            <span class="meta-badge">🏆 First Place - BCA</span>
+            <span class="meta-badge">Choral • 2024</span>
+          </div>
+        </div>
+
+        <p class="composition-description">
+          A musical interpretation of Franz Kafka's <em>Letters to Milena</em>,
+          showing his infatuation despite living such a tormented life. The
+          piece reflects his oscillating emotions through a four-note motive
+          repeated with melodic and harmonic variations. It begins with a
+          melancholic chorus featuring tense harmony, then moves to explorations
+          of various emotions with delicate, frequently changing harmonies.
+        </p>
+
+        <div class="pdf-section">
+          <h3>Score Preview</h3>
+          <iframe
+            src="media/Milena_Score.pdf"
+            class="pdf-preview"
+            type="application/pdf"
+            title="Milena Score"
+          >
+            <p>
+              Your browser does not support PDFs.
+              <a href="media/Milena_Score.pdf" download>Download the score</a>.
+            </p>
+          </iframe>
+        </div>
+
+        <div class="audio-section">
+          <h3>Listen</h3>
+          <audio controls class="audio-player">
+            <source src="media/Milena.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="composition-actions">
+          <a
+            href="media/Milena_Score.pdf"
+            download
+            class="action-button primary"
+          >
+            <span>📄</span>
+            <span>Download Score</span>
+          </a>
+          <a href="media/Milena.mp3" download class="action-button">
+            <span>🎵</span>
+            <span>Download Audio</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 James Doherty. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
