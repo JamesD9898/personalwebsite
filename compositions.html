@@ -120,11 +120,11 @@
       }
 
       .composition-card {
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.6);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border-radius: 28px;
-        border: 2px solid rgba(255, 255, 255, 0.4);
+        border: 2px solid rgba(255, 255, 255, 0.7);
         padding: 3rem;
         transition: all 0.3s ease;
         box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
@@ -133,7 +133,7 @@
       }
 
       .composition-card:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.7);
         transform: translateY(-3px);
         box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
       }
@@ -146,7 +146,7 @@
       .composition-header h2 {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #2d3748;
+        color: #1a202c;
         margin-bottom: 1rem;
       }
 
@@ -168,9 +168,9 @@
       }
 
       .composition-description {
-        font-size: 1.1rem;
-        line-height: 1.9;
-        color: #4a5568;
+        font-size: 1.15rem;
+        line-height: 2;
+        color: #2d3748;
         text-align: center;
         max-width: 900px;
         margin: 0 auto 3rem;
@@ -181,11 +181,44 @@
         margin: 3rem 0;
       }
 
+      .video-section {
+        margin: 3rem 0;
+      }
+
+      .award-section {
+        margin: 2rem 0 2.5rem;
+        text-align: center;
+      }
+
+      .award-image {
+        width: 100%;
+        max-width: 900px;
+        border-radius: 20px;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      .award-caption {
+        margin-top: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #2d3748;
+      }
+
       .pdf-section h3,
       .audio-section h3 {
         font-size: 1.6rem;
         font-weight: 600;
-        color: #2d3748;
+        color: #1a202c;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .video-section h3 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #1a202c;
         margin-bottom: 1.5rem;
         text-align: center;
       }
@@ -222,10 +255,10 @@
         align-items: center;
         gap: 0.75rem;
         padding: 1rem 2.5rem;
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.8);
         border-radius: 35px;
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        color: #2d3748;
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        color: #1a202c;
         text-decoration: none;
         transition: all 0.4s ease;
         font-size: 1rem;
@@ -234,7 +267,7 @@
       }
 
       .action-button:hover {
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.9);
         transform: translateY(-3px);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       }
@@ -322,8 +355,7 @@
       <header class="page-header">
         <h1>Musical Compositions</h1>
         <p>
-          Award-winning compositions exploring diverse musical styles and
-          creative expressions.
+         
         </p>
       </header>
 
@@ -346,6 +378,16 @@
           of various emotions with delicate, frequently changing harmonies.
         </p>
 
+        <div class="award-section">
+          <img
+            src="media/milena-award.jpg"
+            alt="First Place - BCA Composition Contest"
+            class="award-image"
+            onerror="this.style.display='none'"
+          />
+          <p class="award-caption">First Place - BCA Composition Contest</p>
+        </div>
+
         <div class="pdf-section">
           <h3>Score Preview</h3>
           <iframe
@@ -362,11 +404,19 @@
         </div>
 
         <div class="audio-section">
-          <h3>Listen</h3>
+          <h3>Listen (Midi)</h3>
           <audio controls class="audio-player">
             <source src="media/milena.custom_score.mp3" type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
+        </div>
+
+        <div class="video-section">
+          <h3>Watch</h3>
+          <video controls class="pdf-preview" style="height: auto; max-height: 600px;">
+            <source src="media/milena.mov" type="video/mov" />
+            your browser does not support the video tag.
+          </video>
         </div>
 
         <div class="composition-actions">
